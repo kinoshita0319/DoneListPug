@@ -1,0 +1,85 @@
+script.
+  function doneDelete(year, month, day, work_id) {
+    var ele = document.createElement('input');
+    ele.setAttribute('type', 'hidden');
+    ele.setAttribute('name', 'year');
+    ele.setAttribute('value', year);
+    document.mattrix.appendChild(ele);
+    var ele1 = document.createElement('input');
+    ele1.setAttribute('type', 'hidden');
+    ele1.setAttribute('name', 'month');
+    ele1.setAttribute('value', month);
+    document.mattrix.appendChild(ele1);
+    var ele2 = document.createElement('input');
+    ele2.setAttribute('type', 'hidden');
+    ele2.setAttribute('name', 'day');
+    ele2.setAttribute('value', day);
+    document.mattrix.appendChild(ele2);
+    var ele3 = document.createElement('input');
+    ele3.setAttribute('type', 'hidden');
+    ele3.setAttribute('name', 'work_id');
+    ele3.setAttribute('value', work_id);
+    document.mattrix.appendChild(ele3);
+    var ele4 = document.createElement('input');
+    ele4.setAttribute('type', 'hidden');
+    ele4.setAttribute('name', '_method');
+    ele4.setAttribute('value', 'delete');
+    document.mattrix.appendChild(ele4);
+    document.mattrix.submit();
+  };
+
+  function donePost(year, month, day, work_id) {
+    var ele = document.createElement('input');
+    ele.setAttribute('type', 'hidden');
+    ele.setAttribute('name', 'year');
+    ele.setAttribute('value', year);
+    document.donePost.appendChild(ele);
+    var ele1 = document.createElement('input');
+    ele1.setAttribute('type', 'hidden');
+    ele1.setAttribute('name', 'month');
+    ele1.setAttribute('value', month);
+    document.donePost.appendChild(ele1);
+    var ele2 = document.createElement('input');
+    ele2.setAttribute('type', 'hidden');
+    ele2.setAttribute('name', 'day');
+    ele2.setAttribute('value', day);
+    document.donePost.appendChild(ele2);
+    var ele3 = document.createElement('input');
+    ele3.setAttribute('type', 'hidden');
+    ele3.setAttribute('name', 'work_id');
+    ele3.setAttribute('value', work_id);
+    document.donePost.appendChild(ele3);
+    document.donePost.submit();
+  };
+
+form(name="mattrix" method="post" action="./done")
+
+form(name="donePost" method="POST" action="./done")
+
+table(border="1" width="300")
+  tbody
+    - var i=0;
+    //- console.log("mattrix", mattrix);
+    each row, work_id in mattrix
+      if !row
+        - continue;
+      //- console.log("row", row);
+      if i%5 == 0
+        tr
+          each day, dayIndex in days
+            if dayIndex % 10 == 0
+              td
+            td!= day
+      tr
+        each column, dayIndex in row
+          if dayIndex % 10 == 0
+            td(align="center")
+              =work_list[work_list.findIndex(function(work){return work.work_id==work_id;})].work
+          td(align="center")
+            if "〇" === column
+              a(href="JavaScript:doneDelete("+year+", "+month+", "+(dayIndex+1)+", "+work_id+")")
+                =column
+            else
+              a(href="JavaScript:donePost("+year+", "+month+", "+(dayIndex+1)+", "+work_id+")")
+                =column
+      - i++;

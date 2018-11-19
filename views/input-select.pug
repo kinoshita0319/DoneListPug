@@ -1,0 +1,6 @@
+mixin input-select(options, selected)
+    - var options = options ? options : [];
+
+    each value in options
+        option(value=value, selected=(value==selected))
+            =value

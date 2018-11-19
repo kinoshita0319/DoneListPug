@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+
+  form(name="yearMonth" action="/" method="post")
+    select(name="year")
+      include input-select
+      +input-select([...Array.from(Array(10), (v, k) => new Date().getFullYear() - k)], year)
+    |年
+    select(name="month")
+      include input-select
+      +input-select([...Array.from(Array(12), (v, k) => 12 - k)], month)
+    |月
+    button(type="button" onclick="submit()")
+      |表示
+
+  br
+
+  include input-table
+  
