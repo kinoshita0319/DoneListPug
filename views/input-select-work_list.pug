@@ -1,0 +1,6 @@
+mixin input-select-work_list(options)
+  - var options = options ? options : [];
+
+  each value in options
+    option(value=value.work_id)
+      =value.work

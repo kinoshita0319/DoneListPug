@@ -1,69 +1,39 @@
 script.
   function doneDelete(year, month, day, work_id) {
-    var ele = document.createElement('input');
-    ele.setAttribute('type', 'hidden');
-    ele.setAttribute('name', 'year');
-    ele.setAttribute('value', year);
-    document.mattrix.appendChild(ele);
-    var ele1 = document.createElement('input');
-    ele1.setAttribute('type', 'hidden');
-    ele1.setAttribute('name', 'month');
-    ele1.setAttribute('value', month);
-    document.mattrix.appendChild(ele1);
-    var ele2 = document.createElement('input');
-    ele2.setAttribute('type', 'hidden');
-    ele2.setAttribute('name', 'day');
-    ele2.setAttribute('value', day);
-    document.mattrix.appendChild(ele2);
-    var ele3 = document.createElement('input');
-    ele3.setAttribute('type', 'hidden');
-    ele3.setAttribute('name', 'work_id');
-    ele3.setAttribute('value', work_id);
-    document.mattrix.appendChild(ele3);
-    var ele4 = document.createElement('input');
-    ele4.setAttribute('type', 'hidden');
-    ele4.setAttribute('name', '_method');
-    ele4.setAttribute('value', 'delete');
-    document.mattrix.appendChild(ele4);
+    document.mattrix.year.value=year;
+    document.mattrix.month.value=month;
+    document.mattrix.day.value=day;
+    document.mattrix.work_id.value=work_id;
     document.mattrix.submit();
   };
 
   function donePost(year, month, day, work_id) {
-    var ele = document.createElement('input');
-    ele.setAttribute('type', 'hidden');
-    ele.setAttribute('name', 'year');
-    ele.setAttribute('value', year);
-    document.donePost.appendChild(ele);
-    var ele1 = document.createElement('input');
-    ele1.setAttribute('type', 'hidden');
-    ele1.setAttribute('name', 'month');
-    ele1.setAttribute('value', month);
-    document.donePost.appendChild(ele1);
-    var ele2 = document.createElement('input');
-    ele2.setAttribute('type', 'hidden');
-    ele2.setAttribute('name', 'day');
-    ele2.setAttribute('value', day);
-    document.donePost.appendChild(ele2);
-    var ele3 = document.createElement('input');
-    ele3.setAttribute('type', 'hidden');
-    ele3.setAttribute('name', 'work_id');
-    ele3.setAttribute('value', work_id);
-    document.donePost.appendChild(ele3);
+    document.donePost.year.value=year;
+    document.donePost.month.value=month;
+    document.donePost.day.value=day;
+    document.donePost.work_id.value=work_id;
     document.donePost.submit();
   };
 
 form(name="mattrix" method="post" action="./done")
+  input(name="_method" type="hidden" value="delete")
+  input(name="year" type="hidden" value="")
+  input(name="month" type="hidden" value="")
+  input(name="day" type="hidden" value="")
+  input(name="work_id" type="hidden" value="")
 
-form(name="donePost" method="POST" action="./done")
+form(name="donePost" method="post" action="./done")
+  input(name="year" type="hidden" value="")
+  input(name="month" type="hidden" value="")
+  input(name="day" type="hidden" value="")
+  input(name="work_id" type="hidden" value="")
 
 table(border="1" width="300")
   tbody
     - var i=0;
-    //- console.log("mattrix", mattrix);
     each row, work_id in mattrix
       if !row
         - continue;
-      //- console.log("row", row);
       if i%5 == 0
         tr
           each day, dayIndex in days

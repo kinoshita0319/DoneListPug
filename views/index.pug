@@ -18,4 +18,19 @@ block content
   br
 
   include input-table
-  
+
+  br
+
+  form(name="workAdd" action="/work" method="post")
+    input(name="work" type="text" value="")
+    input(type="button" value="追加" onclick="submit();")
+
+  form(name="workDelete" action="/work" method="post")
+    input(name="_method" type="hidden" value="delete")
+    select(name="work_id")
+      include input-select-work_list
+      +input-select-work_list([{work: "", work_id: 0}, ...work_list])
+    button(type="button" onclick="submit()")
+      |削除
+
+  br
